@@ -1,0 +1,29 @@
+{
+  "name": "task-tracker-cli",
+  "version": "1.0.0",
+  "description": "A CLI app to track your tasks and manage your to-do list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eleazar-ng/Task-Tracker-CLI.git"
+  },
+  "keywords": [
+    "CLI",
+    "cli",
+    "task-tracker",
+    "task"
+  ],
+  "author": "Laizer",
+  "license": "ISC",
+  "bin": {
+    "task-cli": "./index.js"
+  },
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Eleazar-ng/Task-Tracker-CLI/issues"
+  },
+  "homepage": "https://github.com/Eleazar-ng/Task-Tracker-CLI#readme"
+}
