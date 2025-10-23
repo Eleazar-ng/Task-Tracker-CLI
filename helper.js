@@ -76,6 +76,16 @@ function saveTasks(tasks){
 	}
 }
 
+function isValidId(id){
+  const isValidId = /^\d+$/.test(id);
+	return isValidId
+}
+
+function isExistingId(id, tasks){
+  const taskIdExists = tasks.some(task => task.id === id);
+  return taskIdExists;
+}
+
 
 
 export {
@@ -83,5 +93,7 @@ export {
   loadTasks,
   generateTaskId,
   getCurrentDateTime,
-  saveTasks
+  saveTasks,
+  isValidId,
+  isExistingId
 }

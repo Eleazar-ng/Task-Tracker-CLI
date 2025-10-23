@@ -1,4 +1,4 @@
-import { generateTaskId, getCurrentDateTime, loadTasks, saveTasks } from "./helper.js"
+import { generateTaskId, getCurrentDateTime, isExistingId, isValidId, loadTasks, saveTasks } from "./helper.js"
 
 function addTask(description) {
   const tasks = loadTasks()
@@ -21,9 +21,35 @@ function addTask(description) {
 	}
 }
 
+function updateTask(id, description){
+  const tasks = loadTasks()
+  const validId = isValidId(id);
+  if(!validId){
+    console.error(`${id} is not a valid ID`)
+    return
+  }
+  const taskId = parseInt(id);
+
+  const existingId = isExistingId(taskId, tasks)
+  if(!existingId){
+    console.error(`Task with ID:${taskId} does not exist`)
+    return
+  }
+
+  tasks[taskId - 1].description = description;
+  tasks[taskId - 1].updatedAt = getCurrentDateTime();
+
+  if(saveTasks(tasks)){
+		console.log(`Task ${taskId} updated successfully`);
+	} else {
+		console.error('Failed to update task');
+	}
+}
+
 
 
 
 export {
-  addTask
+  addTask,
+  updateTask
 }
