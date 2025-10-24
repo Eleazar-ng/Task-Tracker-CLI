@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { showHelp } from "./helper.js";
-import { addTask, updateTask } from "./task_operations.js";
+import { addTask, deleteTask, updateTask } from "./task_operations.js";
 
 // Valid Commands
 const commands = [
@@ -17,6 +17,9 @@ function main() {
 
   const command = args[0].toLowerCase();
 
+  let id
+  let description
+
   try {
     switch(command){
       case 'add':
@@ -24,7 +27,7 @@ function main() {
 					console.error('Description is required for adding a task');
           return
 				}
-        const description = args.slice(1).join(' ');
+        description = args.slice(1).join(' ');
         addTask(description);
         break;
       
@@ -33,10 +36,19 @@ function main() {
           console.error(`Task Id and description are required for updating a task`)
 				  return
         }
-        const id = args[1]
-        const newDescription = args.slice(2).join(' ');
-        updateTask(id, newDescription)
+        id = args[1]
+        description = args.slice(2).join(' ');
+        updateTask(id, description)
         break;
+
+      case 'delete':
+        if(args.length < 2){
+					console.error('Task Id is required for deleting a task');
+          return
+				}
+        id = args[1]
+        deleteTask(id);
+        break;  
 
       default:
         console.error(`${command} is not a valid command`);
