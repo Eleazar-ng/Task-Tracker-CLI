@@ -72,8 +72,37 @@ function deleteTask(id){
 	}
 }
 
+function markTaskInProgress(id){
+  const tasks = loadTasks()
+  const validId = isValidId(id);
+  if(!validId){
+    console.error(`${id} is not a valid ID`)
+    return
+  }
+  const taskId = parseInt(id);
+
+  const existingId = isExistingId(taskId, tasks)
+  if(!existingId){
+    console.error(`Task with ID:${taskId} does not exist`)
+    return
+  }
+
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
+
+  tasks[taskIndex].status = "in-progress";
+  tasks[taskIndex].updatedAt = getCurrentDateTime();
+
+  if(saveTasks(tasks)){
+		console.log(`Task ${taskId} status updated successfully`);
+	} else {
+		console.error('Failed to update task');
+	}
+
+}
+
 export {
   addTask,
   updateTask,
-  deleteTask
+  deleteTask,
+  markTaskInProgress
 }
