@@ -46,10 +46,32 @@ function updateTask(id, description){
 	}
 }
 
+function deleteTask(id){
+  const tasks = loadTasks()
+  const validId = isValidId(id);
+  if(!validId){
+    console.error(`${id} is not a valid ID`)
+    return
+  }
+  const taskId = parseInt(id);
 
+  const existingId = isExistingId(taskId, tasks)
+  if(!existingId){
+    console.error(`Task with ID:${taskId} does not exist`)
+    return
+  }
 
+  const filteredTasks = tasks.filter(task => task.id !== taskId)
+
+  if(saveTasks(filteredTasks)){
+		console.log(`Task ${taskId} deleted successfully`);
+	} else {
+		console.error('Failed to delete task');
+	}
+}
 
 export {
   addTask,
-  updateTask
+  updateTask,
+  deleteTask
 }
