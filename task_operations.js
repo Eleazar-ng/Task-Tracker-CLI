@@ -36,8 +36,10 @@ function updateTask(id, description){
     return
   }
 
-  tasks[taskId - 1].description = description;
-  tasks[taskId - 1].updatedAt = getCurrentDateTime();
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
+
+  tasks[taskIndex].description = description;
+  tasks[taskIndex].updatedAt = getCurrentDateTime();
 
   if(saveTasks(tasks)){
 		console.log(`Task ${taskId} updated successfully`);
