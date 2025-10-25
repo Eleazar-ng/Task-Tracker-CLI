@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { showHelp } from "./helper.js";
-import { addTask, deleteTask, updateTask } from "./task_operations.js";
+import { addTask, deleteTask, markTaskInProgress, updateTask } from "./task_operations.js";
 
 // Valid Commands
 const commands = [
@@ -48,6 +48,15 @@ function main() {
 				}
         id = args[1]
         deleteTask(id);
+        break;
+        
+      case 'mark-in-progress':
+        if(args.length < 2){
+					console.error('Task Id is required for updating a task status');
+          return
+				}
+        id = args[1]
+        markTaskInProgress(id)
         break;  
 
       default:
