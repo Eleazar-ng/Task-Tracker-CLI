@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { showHelp } from "./helper.js";
-import { addTask, deleteTask, markTaskInProgress, updateTask } from "./task_operations.js";
+import { addTask, deleteTask, markTaskStatus, updateTask } from "./task_operations.js";
 
 // Valid Commands
 const commands = [
@@ -56,7 +56,7 @@ function main() {
           return
 				}
         id = args[1]
-        markTaskInProgress(id)
+        markTaskStatus(id, "in-progress")
         break;  
 
       default:

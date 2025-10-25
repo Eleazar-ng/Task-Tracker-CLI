@@ -72,7 +72,7 @@ function deleteTask(id){
 	}
 }
 
-function markTaskInProgress(id){
+function markTaskStatus(id, status){
   const tasks = loadTasks()
   const validId = isValidId(id);
   if(!validId){
@@ -89,7 +89,7 @@ function markTaskInProgress(id){
 
   const taskIndex = tasks.findIndex(task => task.id === taskId);
 
-  tasks[taskIndex].status = "in-progress";
+  tasks[taskIndex].status = status;
   tasks[taskIndex].updatedAt = getCurrentDateTime();
 
   if(saveTasks(tasks)){
@@ -104,5 +104,5 @@ export {
   addTask,
   updateTask,
   deleteTask,
-  markTaskInProgress
+  markTaskStatus
 }
