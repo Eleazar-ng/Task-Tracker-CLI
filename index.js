@@ -57,6 +57,15 @@ function main() {
 				}
         id = args[1]
         markTaskStatus(id, "in-progress")
+        break;
+        
+      case 'mark-done':
+        if(args.length < 2){
+					console.error('Task Id is required for updating a task status');
+          return
+				}
+        id = args[1]
+        markTaskStatus(id, "done")
         break;  
 
       default:
