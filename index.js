@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { showHelp } from "./helper.js";
-import { addTask, deleteTask, markTaskStatus, updateTask } from "./task_operations.js";
+import { addTask, deleteTask, listTasks, markTaskStatus, updateTask } from "./task_operations.js";
 
 // Valid Commands
 const commands = [
@@ -67,6 +67,20 @@ function main() {
         id = args[1]
         markTaskStatus(id, "done")
         break;  
+
+      case 'list': 
+        if(args.length < 2){
+          listTasks();
+				}else {
+          const status = args[1].toLowerCase();
+          const validStatuses = ['todo', 'in-progress', 'done']
+          if(!validStatuses.includes(status)){
+            console.error(`${status} is not a valid status`);
+            return
+          }
+          listTasks(status);
+        } 
+        break;
 
       default:
         console.error(`${command} is not a valid command`);
