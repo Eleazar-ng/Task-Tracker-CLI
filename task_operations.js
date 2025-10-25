@@ -100,9 +100,38 @@ function markTaskStatus(id, status){
 
 }
 
+function listTasks(status = null){
+  const tasks = loadTasks();
+  if(tasks.length === 0){
+    console.log('No tasks were found');
+    return
+  }
+
+  if(!status){
+    console.log(`******** Tasks *******`)
+    tasks.forEach((task, index) => {
+      console.log(`${index + 1}. TaskID: ${task.id}, Desc: ${task.description}, Status: ${task.status}, Created: ${task.createdAt}`)
+    });
+    return
+  }
+
+  const filteredTasks = tasks.filter(task => task.status == status);
+  if(filteredTasks.length === 0){
+    console.log(`No ${status} tasks were found`);
+    return
+  } else {
+    console.log(`******** ${status} tasks *******`)
+    filteredTasks.forEach((task, index) => {
+      console.log(`${index + 1}. TaskID: ${task.id}, Desc: ${task.description}, Status: ${task.status}, Created: ${task.createdAt}`)
+    })
+    return
+  }
+}
+
 export {
   addTask,
   updateTask,
   deleteTask,
-  markTaskStatus
+  markTaskStatus,
+  listTasks
 }
